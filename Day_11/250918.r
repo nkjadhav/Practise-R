@@ -27,11 +27,12 @@ plot(ts1, xlab = "Year+1", ylab = "GOOG")
 plot(decompose(ts1), xlab = "Years+1")
 
 # Training and Testing Data
-ts1Train<-window(ts1,start=1,emd=3.5)
-ts1Test<-window(ts1,start=3.5,emd=4.5)
 
-ts1Train
-ts1Test
+ts1Train<-window(ts1,start=1,end=3.5)
+plot(ts1Train)
+
+ts1Test<-window(ts1,start=3.5,end=4.5)
+plot(ts1Test)
 
 # Forcasting using simple moving average
 # For univariate time series
@@ -41,17 +42,17 @@ plot(ts1)
 goog_ma<-ma(ts1Train, order = 3)
 goog_ma_forecast<-forecast(goog_ma)
 lines(goog_ma_forecast$fitted, col="red")
-#lines(goog_ma_forecast$mean, col="blue")
+lines(goog_ma_forecast$mean, col="blue")
 
 goog_ma<-ma(ts1Train, order = 4)
 goog_ma_forecast<-forecast(goog_ma)
 lines(goog_ma_forecast$fitted, col="blue")
-#lines(goog_ma_forecast$mean, col="yellow")
+lines(goog_ma_forecast$mean, col="yellow")
 
 goog_ma<-ma(ts1Train, order = 10)
 goog_ma_forecast<-forecast(goog_ma)
 lines(goog_ma_forecast$fitted, col="green")
-#lines(goog_ma_forecast$mean, col="orange")
+lines(goog_ma_forecast$mean, col="orange")
 
 plot(goog_ma_forecast)
 lines(ts1Test)
